@@ -1,0 +1,18 @@
+author detail page: {{author}}
+<button hx-post='{% url "update-author" author.id %}' hx-swap="innerHTML" hx-target="#author">update</button>
+<hr>
+
+
+<!-- this section for books -->
+<button hx-get="{% url 'book-form' %}" hx-swap="beforeend" hx-target="#bookforms">
+    add book
+</button>
+
+
+<div id="bookforms">
+
+{% for book in books %}
+    {% include "partials/book_detail.html" %}
+{% endfor %}
+    
+</div>

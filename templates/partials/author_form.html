@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+      
+
+<div hx-target="#author" hx-swap="innerHTML">
+    <form method="post">
+        {% csrf_token %}
+        {{form}}
+        {% if author %}
+        <button hx-post="{% url 'update-author' author.id %}">submit</button>
+        {% endif %}
+        
+    </form>
+</div>
+
+
+
+
+<!-- this section for books -->
+<button hx-get="{% url 'book-form' %}" hx-swap="beforeend" hx-target="#bookforms">
+    add book
+</button>
+
+
+<div id="bookforms">
+
+{% for book in books %}
+    {% include "partials/book_detail.html" %}
+{% endfor %}
+    
+</div>
+{% endblock %}
